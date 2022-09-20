@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.proj.mapper.UserMapper">
+    <select id="login" parameterType="String" resultType="Integer">
+        select cid from customer where phone=#{phone} and password=#{password} and exist=1
+    </select>
+
+    <update id="updateInfo" parameterType="com.proj.po.CustomerInfo">
+        update customer_info set name = #{name}, age = #{age} where cid=#{cid} and exist=1
+    </update>
+
+    <insert id="registerSave" parameterType="String">
+        insert into customer(phone,password) values (#{phone},#{password})
+    </insert>
+
+    <select id="search" parameterType="Integer" resultType="com.proj.po.CustomerInfo">
+        select cid,name,age from customer_info where cid=#{cid} and exist=1
+    </select>
+</mapper>

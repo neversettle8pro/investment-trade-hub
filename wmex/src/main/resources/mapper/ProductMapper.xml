@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.proj.mapper.ProductMapper">
+    <select id="getProduct" parameterType="Integer" resultType="com.proj.po.ProductInfo">
+        select pid, amount, price, rate, delivery, date from product where pid = #{pid} and exist=1
+    </select>
+
+    <insert id="createProduct" parameterType="com.proj.po.ProductInfo">
+        insert into product(amount, price, rate, delivery, date) values (#{amount}, #{price}, #{rate}, #{delivery}, #{date})
+    </insert>
+
+    <update id="updateProduct" parameterType="com.proj.po.ProductInfo">
+        update product set amount = #{amount}, price = #{price}, rate = #{rate}, delivery = #{delivery}, date = #{date} where pid = #{pid} and exist=1
+    </update>
+
+    <select id="newDayGetInfo" resultType="com.proj.po.ProductInfo">
+        select pid,price,rate from product where exist=1
+    </select>
+
+    <update id="newDaySetInfo" parameterType="com.proj.po.ProductInfo">
+        update product set price = #{price} where pid = #{pid} and exist=1
+    </update>
+
+    <update id="changeAmount" parameterType="com.proj.po.ProductInfo">
+        update product set amount = #{amount} where pid = #{pid} and exist=1
+    </update>
+
+    <select id="getAmount" parameterType="Integer" resultType="Integer">
+        select amount from product where pid = #{pid} and exist=1
+    </select>
+
+    <select id="getPrice" parameterType="Integer" resultType="BigDecimal">
+        select price from product where pid = #{pid} and exist=1
+    </select>
+
+    <select id="showProduct" resultType="com.proj.po.ProductInfo">
+        select pid,amount,price,rate,delivery,date from product where exist=1
+    </select>
+</mapper>

@@ -1,0 +1,33 @@
+server:
+  # 设置项目启动的端口号
+  port: 8888
+  # 设置项目的访问路径（上下文路径）
+  #servlet:
+    #context-path: /finance
+
+## 数据源配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/wmex?serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: 123456
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password:
+
+## mybatis 配置
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
+  ##指定实体类所在的包
+  type-aliases-package: com.proj.entity
+  configuration:
+    ## 下划线转驼峰配置
+    map-underscore-to-camel-case: true
+
+## pageHelper
+pagehelper:
+  helper-dialect: mysql
+

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.proj.mapper.AccountMapper">
+    <select id="getAccount" parameterType="Integer" resultType="Integer">
+        select aid from customer_account where cid=#{cid} and exist=1
+    </select>
+
+    <select id="getCustomer" parameterType="Integer" resultType="Integer">
+        select cid from customer_account where aid=#{aid} and exist=1
+    </select>
+
+    <insert id="createChecking" parameterType="Integer">
+        insert into account(type) values ("CHECKING")
+    </insert>
+
+    <insert id="createInvest" parameterType="Integer">
+        insert into account(type) values ("INVEST")
+    </insert>
+
+    <update id="balanceOpt" parameterType="com.proj.po.AccountInfo">
+        update account set balance=#{balance} where aid=#{aid} and exist=1
+    </update>
+
+    <select id="getBalance" parameterType="Integer" resultType="BigDecimal">
+        select balance from account where aid=#{aid} and exist=1
+    </select>
+
+    <select id="checkType" parameterType="Integer" resultType="String">
+        select type from account where aid=#{aid} and exist=1
+    </select>
+
+    <select id="newestId" resultType="Integer">
+        select max(aid) from account
+    </select>
+    
+    <insert id="buildRelation" parameterType="Integer">
+        insert into customer_account(cid,aid) values (#{cid},#{aid})
+    </insert>
+</mapper>
