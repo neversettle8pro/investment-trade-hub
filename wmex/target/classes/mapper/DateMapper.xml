@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.proj.mapper.DateMapper">
+    <update id="toTomorrow" parameterType="Date">
+        update date set today=#{day}
+    </update>
+
+    <select id="getToday" resultType="Date">
+        select today from date
+    </select>
+</mapper>
